@@ -13,8 +13,10 @@ const NavbarCategories = ({ children }) => {
         <button onClick={sidebarHandler} className="md:hidden">
           +
         </button>
-        <div>My Logo</div>
-        <div className="hidden md:flex flex-row">{children}</div>
+        <button>
+          <a href="/">Logo</a>
+        </button>
+        <div className="hidden md:flex flex-row">{children}</div>s
         <div className="flex flex-row items-center justify-around w-1/5">
           <button>L</button>
           <button>C</button>
