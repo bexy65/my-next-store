@@ -1,8 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import { FaBars, FaUser, FaShoppingCart } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 
-const Navbar = ({ children }) => {
+interface Props {
+  children?: ReactNode;
+}
+
+const Navbar = ({ children, ...props }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const sidebarHandler = () => {
@@ -18,11 +23,11 @@ const Navbar = ({ children }) => {
           <a href="/">Logo</a>
         </button>
         <div className="hidden md:flex flex-row">{children}</div>
-        <div className="flex flex-row items-center justify-around w-1/5">
-          <button>
+        <div className="flex flex-row items-center justify-between">
+          <button className="ml-4">
             <FaUser />
           </button>
-          <button>
+          <button className="ml-4">
             <FaShoppingCart />
           </button>
         </div>
@@ -32,8 +37,8 @@ const Navbar = ({ children }) => {
           isExpanded ? "expand" : "collapse"
         }`}
       >
-        <button onClick={sidebarHandler} className="text-end p-2">
-          X
+        <button onClick={sidebarHandler} className="self-end text-lg p-2">
+          <FaXmark />
         </button>
         {children}
       </div>
