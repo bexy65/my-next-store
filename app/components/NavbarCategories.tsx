@@ -16,7 +16,7 @@ function capitalizeFirstLetter(string: string) {
   return (string.charAt(0).toUpperCase() + string.slice(1)) as string;
 }
 
-const Navbar = async () => {
+const NavbarCategories = async () => {
   const productCategories: string[] = await fetchCategories(url);
 
   return (
@@ -30,4 +30,4 @@ const Navbar = async () => {
   );
 };
 
-export default Navbar;
+export default NavbarCategories;
