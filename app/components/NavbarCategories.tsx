@@ -1,39 +1,33 @@
-"use client";
-import React, { useState } from "react";
+import Link from "next/link";
+import React from "react";
+const url: string = "https://fakestoreapi.com/products/categories";
 
-const NavbarCategories = ({ children }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+async function fetchCategories(url: string): Promise<any> {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data as any[];
+}
 
-  const sidebarHandler = () => {
-    setIsExpanded((isExpanded) => !isExpanded);
-  };
+function clearString(str: string) {
+  return str.replace(/[^\w]/g, "") as string;
+}
+
+function capitalizeFirstLetter(string: string) {
+  return (string.charAt(0).toUpperCase() + string.slice(1)) as string;
+}
+
+const Navbar = async () => {
+  const productCategories: string[] = await fetchCategories(url);
+
   return (
-    <>
-      <div className="header-container flex flex-row p-2 justify-between items-center md:rounded-2xl md:m-4">
-        <button onClick={sidebarHandler} className="md:hidden">
-          +
+    <ul className="flex flex-col md:flex-row p-2 justify-center text-center">
+      {productCategories?.map((e: string, index: number) => (
+        <button key={index} className="p-1 text-start">
+          <Link href={`/${clearString(e)}`}>{capitalizeFirstLetter(e)}</Link>
         </button>
-        <button>
-          <a href="/">Logo</a>
-        </button>
-        <div className="hidden md:flex flex-row">{children}</div>s
-        <div className="flex flex-row items-center justify-around w-1/5">
-          <button>L</button>
-          <button>C</button>
-        </div>
-      </div>
-      <div
-        className={`navbar-container flex flex-col md:flex-row md:hidden text-start ${
-          isExpanded ? "expand" : "collapse"
-        }`}
-      >
-        <button onClick={sidebarHandler} className="text-end p-2">
-          X
-        </button>
-        {children}
-      </div>
-    </>
+      ))}
+    </ul>
   );
 };
 
-export default NavbarCategories;
+export default Navbar;

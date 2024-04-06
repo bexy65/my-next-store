@@ -1,28 +1,43 @@
-import Link from "next/link";
-import React from "react";
-const url: string = "https://fakestoreapi.com/products/categories";
+"use client";
+import React, { useState } from "react";
+import { FaBars, FaUser, FaShoppingCart } from "react-icons/fa";
 
-async function fetchCategories(url: string): Promise<any> {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data as any[];
-}
+const Navbar = ({ children }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-function clearString(str: string) {
-  return str.replace(/[^\w]/g, "") as string;
-}
-
-const Navbar = async () => {
-  const productCategories: string[] = await fetchCategories(url);
-
+  const sidebarHandler = () => {
+    setIsExpanded((isExpanded) => !isExpanded);
+  };
   return (
-    <ul className="flex flex-col md:flex-row p-2 justify-center text-center">
-      {productCategories?.map((e: string, index: number) => (
-        <button key={index} className="p-1 text-start">
-          <Link href={`/${clearString(e)}`}>{e}</Link>
+    <>
+      <div className="header-container flex flex-row p-2 justify-between items-center md:rounded-2xl md:m-4">
+        <button onClick={sidebarHandler} className="md:hidden">
+          <FaBars />
         </button>
-      ))}
-    </ul>
+        <button>
+          <a href="/">Logo</a>
+        </button>
+        <div className="hidden md:flex flex-row">{children}</div>
+        <div className="flex flex-row items-center justify-around w-1/5">
+          <button>
+            <FaUser />
+          </button>
+          <button>
+            <FaShoppingCart />
+          </button>
+        </div>
+      </div>
+      <div
+        className={`navbar-container flex flex-col md:flex-row md:hidden text-start ${
+          isExpanded ? "expand" : "collapse"
+        }`}
+      >
+        <button onClick={sidebarHandler} className="text-end p-2">
+          X
+        </button>
+        {children}
+      </div>
+    </>
   );
 };
 
