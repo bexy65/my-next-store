@@ -1,29 +1,31 @@
 import Link from "next/link";
 import React from "react";
-const url: string = "https://fakestoreapi.com/products/categories";
+import PocketBase from "pocketbase";
 
-async function fetchCategories(url: string): Promise<any> {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data as any[];
+const db = new PocketBase("http://127.0.0.1:8090");
+
+interface Category {
+  name: string;
+  description: string;
 }
 
-function clearString(str: string) {
-  return str.replace(/[^\w]/g, "") as string;
+interface CategoryData {
+  items: Category[];
 }
 
-function capitalizeFirstLetter(string: string) {
-  return (string.charAt(0).toUpperCase() + string.slice(1)) as string;
+async function fetchCategories(): Promise<Category[]> {
+  const data: CategoryData = await db.collection("category").getList();
+  return data.items;
 }
 
 const NavbarCategories = async () => {
-  const productCategories: string[] = await fetchCategories(url);
+  const productCategories: Category[] = await fetchCategories();
 
   return (
     <ul className="flex flex-col md:flex-row p-2 justify-center text-center">
-      {productCategories?.map((e: string, index: number) => (
+      {productCategories?.map((e: Category, index: number) => (
         <button key={index} className="p-1 text-start">
-          <Link href={`/${clearString(e)}`}>{capitalizeFirstLetter(e)}</Link>
+          <Link href={`/${e.name}`}>{e.name.toUpperCase()}</Link>
         </button>
       ))}
     </ul>
