@@ -24,10 +24,56 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  height: 100%;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.header-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.close {
+  display: none;
+}
+
+.open {
+  display: block;
+}
+
+.cart-modal {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    color: white;
+    transition: 300ms;
+    backdrop-filter: blur(5px) saturate(200%);
+    -webkit-backdrop-filter: blur(5px) saturate(200%);
+    background-color: rgba(57, 57, 57, 0.66);
+  }
+
+  .expand {
+    width: 240px;
+  }
+
+  .collapse {
+    width: 0;
+    overflow: hidden;
   }
 }
