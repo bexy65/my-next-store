@@ -9,7 +9,6 @@ interface Props {
 
 const Navbar = ({ children, ...props }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const sidebarHandler = () => {
     setIsExpanded((isExpanded) => !isExpanded);
@@ -29,16 +28,14 @@ const Navbar = ({ children, ...props }: Props) => {
           <button className="ml-4">
             <FaUser />
           </button>
-          <button
-            className="cart-container ml-4"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <FaShoppingCart />
+          <button className="cart-container ml-4">
+            <a href="/cart">
+              <FaShoppingCart />
+            </a>
           </button>
         </div>
       </div>
-      <div className={`cart-modal ${isHovered ? "open" : "close"}`}>
+      <div className={`cart-modal`}>
         <div>
           <p>name</p>
           <img src="" alt="some image" />
