@@ -23,7 +23,7 @@ export default function RootLayout({
         <Navbar>
           <NavbarCategories />
         </Navbar>
-        {children}
+        <div className="my-4">{children}</div>
       </body>
     </html>
   );
