@@ -1,5 +1,4 @@
 import React from "react";
-import PocketBase from "pocketbase";
 
 const Cart = async () => {
   return (
