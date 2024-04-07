@@ -9,10 +9,12 @@ interface Props {
 
 const Navbar = ({ children, ...props }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const sidebarHandler = () => {
     setIsExpanded((isExpanded) => !isExpanded);
   };
+
   return (
     <>
       <div className="header-container flex flex-row p-2 justify-between items-center md:rounded-2xl md:m-4">
@@ -27,9 +29,20 @@ const Navbar = ({ children, ...props }: Props) => {
           <button className="ml-4">
             <FaUser />
           </button>
-          <button className="ml-4">
+          <button
+            className="cart-container ml-4"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <FaShoppingCart />
           </button>
+        </div>
+      </div>
+      <div className={`cart-modal ${isHovered ? "open" : "close"}`}>
+        <div>
+          <p>name</p>
+          <img src="" alt="some image" />
+          <p>price</p>
         </div>
       </div>
       <div
