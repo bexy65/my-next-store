@@ -25,7 +25,7 @@ const NavbarCategories = async () => {
     <ul className="flex flex-col md:flex-row p-2 justify-center text-center">
       {productCategories?.map((e: Category, index: number) => (
         <button key={index} className="p-1 text-start">
-          <Link href={`/${e.name}`}>{e.name.toUpperCase()}</Link>
+          <Link href={`/${e.name.toLowerCase()}`}>{e.name.toUpperCase()}</Link>
         </button>
       ))}
     </ul>
