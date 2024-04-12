@@ -20,7 +20,7 @@ const Navbar = ({ children, ...props }: Props) => {
         <button onClick={sidebarHandler} className="md:hidden">
           <FaBars />
         </button>
-        <button>
+        <button className="logo">
           <a href="/">Logo</a>
         </button>
         <div className="hidden md:flex flex-row">{children}</div>
@@ -28,18 +28,11 @@ const Navbar = ({ children, ...props }: Props) => {
           <button className="ml-4">
             <FaUser />
           </button>
-          <button className="cart-container ml-4">
+          <button className="ml-4">
             <a href="/cart">
               <FaShoppingCart />
             </a>
           </button>
-        </div>
-      </div>
-      <div className={`cart-modal`}>
-        <div>
-          <p>name</p>
-          <img src="" alt="some image" />
-          <p>price</p>
         </div>
       </div>
       <div

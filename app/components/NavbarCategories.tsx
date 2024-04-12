@@ -22,9 +22,9 @@ const NavbarCategories = async () => {
   const productCategories: Category[] = await fetchCategories();
 
   return (
-    <ul className="flex flex-col md:flex-row p-2 justify-center text-center">
+    <ul className="flex flex-col md:flex-row p-2 justify-center text-center ">
       {productCategories?.map((e: Category, index: number) => (
-        <button key={index} className="p-1 text-start">
+        <button key={index} className="categories p-1 md:mx-4 text-start">
           <Link href={`/${e.name.toLowerCase()}`}>{e.name.toUpperCase()}</Link>
         </button>
       ))}
